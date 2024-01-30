@@ -1,0 +1,22 @@
+site_name: CS61A - SCBZ's Course Notes
+site_url: https://scbzfarmingtest.github.io/CS61A/
+nav:
+  - Home: index.md
+  - Lectures: 
+    - '01': lectures/01.md
+    - '02': lectures/02.md
+    - 'ex02': lectures/ex02.md
+    - '03': lectures/03.md
+    - 'ex03': lectures/03.md
+  - Additional Tools:
+    - doctest: additionalTools/doctest
+  - Deep-dives:
+    - What are FUNCTIONs in Python?: deep-dives/functions.md
+
+theme: 
+  name: mkdocs
+
+markdown_extensions:
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tasklist
