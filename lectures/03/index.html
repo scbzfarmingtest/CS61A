@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://scbzfarmingtest.github.io/CS61A/lectures/03/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>ex03 - CS61A - SCBZ's Course Notes</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">CS61A - SCBZ's Course Notes</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Lectures <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../01/" class="dropdown-item">01</a>
+</li>
+                                    
+<li>
+    <a href="../02/" class="dropdown-item">02</a>
+</li>
+                                    
+<li>
+    <a href="../ex02/" class="dropdown-item">ex02</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item">03</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">ex03</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Additional Tools <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../additionalTools/doctest" class="dropdown-item">doctest</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Deep-dives <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../deep-dives/functions/" class="dropdown-item">What are FUNCTIONs in Python?</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="./" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../../deep-dives/functions/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#lecture-03-cs61a-fa2022" class="nav-link">Lecture 03 - CS61A fa2022</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#side-effect-and-return-values" class="nav-link">Side Effect (and Return Values)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#more-function-features" class="nav-link">More Function Features</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#boolean-expression" class="nav-link">Boolean Expression</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#statement" class="nav-link">Statement</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#terms" class="nav-link">Terms</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#vocabs-and-phrases" class="nav-link">Vocabs and Phrases</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="lecture-03-cs61a-fa2022">Lecture 03 - CS61A fa2022</h1>
+<h2 id="side-effect-and-return-values">Side Effect (and Return Values)</h2>
+<ol>
+<li><em>Side effect:</em> The action besides returning value is a side effect of a function.</li>
+<li>Fucntions can deal with the params either way. e.g. <code>print()</code> will have a side effect of printing things on the monitor and return "<em>nothing</em>", which actually is <code>None</code>.<ul class="task-list">
+<li><code>None</code> is a type of <code>NoneType</code>, which is unsupported for operand. e.g. <code>add(None, None)</code> and <code>None + 1</code> both returns <code>TypeError</code></li>
+<li><code>None</code> will be returned if no value has been explicitly returned. </li>
+<li class="task-list-item"><input type="checkbox" disabled/> Is this better?<blockquote>
+<p>Revised Version by <code>Chatgpt</code>  </p>
+<p>Your sentence is already clear and grammatically correct. However, you can make it slightly more concise and idiomatic:
+"None will be returned if no value is explicitly provided."
+This version conveys the same meaning in a more streamlined manner.</p>
+</blockquote>
+</li>
+<li><code>print(None)</code> and <code>print(print(1), print(2))</code> both return <code>None</code>, while the latter one also has <em>side effects</em> to print <code>1</code> and <code>2</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="more-function-features">More Function Features</h2>
+<ol>
+<li><em>Default value:</em> Operands of Python can have defined default value, just like C++</li>
+<li><em>Multiple return values:</em> Python <strong>supports</strong> <code>return val1, val2</code>, which is <strong>not</strong> supported in C++</li>
+<li><em>Doctests:</em> A powerful tools for case test. See more <a href="/cs61a/docs/additionalTools/doctest">here</a></li>
+</ol>
+<h2 id="boolean-expression">Boolean Expression</h2>
+<ol>
+<li>
+<blockquote>
+<p>Google Maps uses a boolean to decide whether to avoid highways in driving directions:<br />
+<code>avoid_highways = True</code><br />
+Twitter uses a boolean to remember where the user allows personalized ads:<br />
+<code>personalized_ads = False</code>   </p>
+</blockquote>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" disabled checked/> How do they know? Twitter is not be a open source software, is it?</li>
+<li><strong>Stupid Question!</strong> <strong>Answer:</strong> <strong>Docs</strong>! e.g. <a href="https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/guides/parameter-reference1">Twitter params - dnt</a></li>
+</ul>
+</li>
+<li><em>Comparison</em>, <em>logical</em> and their <em>compound</em> operation.</li>
+<li>Use <code>==</code> for if_equal!<ul>
+<li>Why?</li>
+<li>Inspired by CS50P, compiler cannot tell the difference between <em>assign</em> and <em>if_equal</em>.</li>
+</ul>
+</li>
+<li>Trick: <code>return grade &gt; 65</code> without <code>if</code> and <code>else</code></li>
+</ol>
+<h2 id="statement">Statement</h2>
+<ol>
+<li>Revice that, for structure of a <em>function</em>:<br />
+    <div class="highlight"><pre><span></span><code>def &lt;name&gt;(&lt;parameters&gt;):        # ← Function signature
+    return &lt;return expression&gt;   # ← Function body
+</code></pre></div></li>
+<li>For <em>compound statements</em>, which is a statement that contains other statements:
+    <div class="highlight"><pre><span></span><code>&lt;header&gt;:                        # CLAUSE
+    &lt;statement&gt;                  # SUITE
+    &lt;statement&gt;                  # a sequence of statements
+</code></pre></div></li>
+<li><em>Conditional statement:</em><ol>
+<li><code>if</code>, <code>else</code>: no <code>(</code> and <code>)</code>.</li>
+<li><code>elif</code> supported.</li>
+</ol>
+</li>
+<li><em>Loops:</em><ol>
+<li><code>while</code>, no <code>(</code> and <code>)</code>.</li>
+<li><code>break</code> and <code>continue</code><ul class="task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> Why <code>continue</code> is not mentioned in ppt?</li>
+</ul>
+</li>
+<li><code>for</code> is somehow complicated:<ul class="task-list">
+<li>Syntax: <code>for &lt;index_val&gt; in &lt;array&gt;:</code>. <strong>Beware to append <code>:</code></strong>.</li>
+<li>Usage:<ol>
+<li><code>for x in ["apple", "banana", "cherry"]:</code></li>
+<li><code>for x in fruits:  # fruits=["apple", "banana", "cherry"]</code></li>
+<li><code>for x in range(&lt;from&gt;, &lt;to&gt;, &lt;increasment&gt;):</code></li>
+<li><code>for x in "string"  # x will be 's' 't' 'r' 'i' 'n' and 'g'</code> </li>
+</ol>
+</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Why <code>for</code> is not mentioned? </li>
+</ul>
+</li>
+</ol>
+</li>
+<li><code>pass</code>: placeholder statement, avoiding errors for somewhere not implemented. <strong>Note:</strong>  <ol>
+<li><code>;</code> in C is of the same use</li>
+<li><em>idle</em> in OS is somehow similar</li>
+<li><code>;;</code> in SHELL is not related, which is used <em>only</em> after the end of each <code>case</code> suite</li>
+</ol>
+</li>
+<li></li>
+</ol>
+<h2 id="terms">Terms</h2>
+<table>
+<thead>
+<tr>
+<th>en</th>
+<th>zh_CN</th>
+<th>Supplement</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="vocabs-and-phrases">Vocabs and Phrases</h2>
+<table>
+<thead>
+<tr>
+<th>en</th>
+<th>Explanation</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/jquery-3.6.0.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
